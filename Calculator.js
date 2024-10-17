@@ -9,4 +9,19 @@ function add(numbers) {
             delimiter = parts[0].substring(2); // find and remove delimeters length
             numbers = parts[1]; // final number
         }
-}
+
+        numbers = numbers.replace(/\n/g, delimiter);
+
+        const numArray = numbers.split(delimiter).map(num => parseInt(num, 10));
+
+        //negative numbers
+        const negativeNumbers = numArray.filter(num => num < 0);
+        if (negativeNumbers.length > 0) {
+            throw new NegativeNumberError(negativeNumbers); // Use the correct error class
+        }
+    
+        // Return the sum and find out NaN.
+        return numArray.reduce((sum, num) => sum + (isNaN(num) ? 0 : num), 0);
+    }
+    
+module.exports = { add };
