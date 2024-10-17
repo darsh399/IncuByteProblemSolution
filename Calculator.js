@@ -1,3 +1,5 @@
+const { NegativeNumberError } = require('./Error');
+
 function add(numbers) {
     if (!numbers) return 0; // Will return 0 if numbers not contains or empty
     if (numbers.length === 1) return Number(numbers); // Will return same number if only one number available
@@ -17,10 +19,10 @@ function add(numbers) {
         //negative numbers
         const negativeNumbers = numArray.filter(num => num < 0);
         if (negativeNumbers.length > 0) {
-            throw new NegativeNumberError(negativeNumbers); // Use the correct error class
+            throw new  NegativeNumberError(negativeNumbers); // Use the correct error class
         }
     
-        // Return the sum and find out NaN.
+        // Return the sum.
         return numArray.reduce((sum, num) => sum + (isNaN(num) ? 0 : num), 0);
     }
     
